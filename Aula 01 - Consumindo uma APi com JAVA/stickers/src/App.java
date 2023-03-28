@@ -34,18 +34,21 @@ public class App {
 
         /* Exibindo a API */
         for (Map<String, String> filme : listaDeFilmes) {
-            System.out.println(String.format("\u001b[1m %s \u001b[0m", filme.get("title")));
-            String rating = filme.get("imDbRating");
-            System.out.println(String.format("Notas: \u001b[32m %s \u001b[0m", rating));
+            printFormattedMovies(filme);
+        }
+    }
 
-            var r = ((int)Double.parseDouble(rating));
-            for (int i = 0; i < r; i++) {
-                System.out.print("\uD83D\uDC99");
-            }
-            
-            System.out.println();
-            System.out.println();
+    static void printFormattedMovies(Map<String, String> movie) {
+        System.out.println(String.format("\u001b[1m %s \u001b[0m", movie.get("title")));
+        String rating = movie.get("imDbRating");
+        System.out.println(String.format("Notas: \u001b[32m %s \u001b[0m", rating));
+
+        var r = ((int)Double.parseDouble(rating));
+        for (int i = 0; i < r; i++) {
+            System.out.print("\uD83D\uDC99");
         }
 
+        System.out.println();
+        System.out.println();
     }
 }

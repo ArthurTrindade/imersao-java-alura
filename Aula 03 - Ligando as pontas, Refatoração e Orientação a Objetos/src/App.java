@@ -6,14 +6,16 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         // url da API
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularMovies.json";
+        API api = API.IMDB;
 
+        String url = api.getUrl();
+        ExtractorImage extractorImages = api.getExtractor();
+        
         var http = new ClientHttp();
 
         String json = http.getBody(url);
 
-        ExtractorImage extractorImagesIMDB = new ExtractorImageIMDB();
-        List<Image> imagesIMDB = extractorImagesIMDB.getImages(json);
+        List<Image> imagesIMDB = extractorImages.getImages(json);
 
         var stickets = new StickerGenerator();
 

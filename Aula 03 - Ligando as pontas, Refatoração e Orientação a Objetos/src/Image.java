@@ -1,0 +1,1 @@
+public record Image(String title, String urlImage){}

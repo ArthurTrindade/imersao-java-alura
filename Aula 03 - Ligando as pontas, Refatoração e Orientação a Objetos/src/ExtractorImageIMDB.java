@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,18 +8,10 @@ public class ExtractorImageIMDB implements ExtractorImage {
         /* Parseando os dados de body */
         var parser = new JsonParser();
         List<Map<String, String>> listAttributes = parser.parse(json); 
+
+        return listAttributes.stream()
+            .map(attributes -> new Image(attributes.get("title"), attributes.get("image")))
+            .toList();    
         
-        List<Image> images = new ArrayList<>();
-
-        for (Map<String, String> attributes: listAttributes) {
-            String title = attributes.get("title");
-            String urlImage = attributes.get("image"); 
-
-            var Image = new Image(title, urlImage);
-            images.add(Image);
-        }
-
-        return images;
     }
-
 }

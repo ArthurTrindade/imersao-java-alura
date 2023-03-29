@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,17 +9,9 @@ public class ExtractorImageNasa implements ExtractorImage {
         var parser = new JsonParser();
         List<Map<String, String>> listAttributes = parser.parse(json); 
         
-        List<Image> images = new ArrayList<>();
-
-        for (Map<String, String> attributes: listAttributes) {
-            String title = attributes.get("title");
-            String urlImage = attributes.get("url"); 
-
-            var Image = new Image(title, urlImage);
-            images.add(Image);
-        }
-
-        return images;
+        return listAttributes.stream()
+            .map(attributes -> new Image(attributes.get("title"), attributes.get("url")))
+            .toList(); 
     }
 
 }
